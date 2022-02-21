@@ -3,4 +3,14 @@ layout:
 - go.kubebuilder.io/v3
 projectName: release-controller
 repo: github.com/smileisak/release-controller
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: release-controller.io
+  group: release-controller.io
+  kind: ReleaseStore
+  path: github.com/smileisak/release-controller/api/v1alpha1
+  version: v1alpha1
 version: "3"
