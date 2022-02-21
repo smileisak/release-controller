@@ -1,0 +1,6 @@
+domain: release-controller.io
+layout:
+- go.kubebuilder.io/v3
+projectName: release-controller
+repo: github.com/smileisak/release-controller
+version: "3"
