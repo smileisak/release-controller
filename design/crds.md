@@ -22,7 +22,7 @@ to be up-to-date regarding what is happening in open source field.
 
 `ReleaseTrack` Custom Resource Definition is cluster scoped, it defines the following :
 1. releaseStoreRef from where the releases will be grabbed.
-2. actionStoreRef defines what to do when a new Release is out.
+2. action defines what to do when a new Release is out.
 
 
 ```yaml
@@ -33,11 +33,23 @@ metadata:
 spec:
   releaseStoreRef:
     name: github
-  actionStoreRef:
-    name: slack
+  action:
+    provider:
+      slack:
+        auth:
+          secretRef:
+            name: secret-containing-token
+            namespace: example
 status:
   lastVersion: v2.1.1
 ```
+
+Action Providers can be multiple as following:
+
+* Slack
+* Teams
+* Gitlab Issue
+* Jira Ticket
 
 ### ReleaseStore
 
@@ -62,23 +74,6 @@ Providers can be multiple, but ReleaseStore should refer to one provider. These 
 * ArtifactHub
 
 
-### ActionStore
-
-```yaml
-apiVersion: release-controller.io/v1alpha1
-kind: ActionStore 
-metadata:
-  name: slack
-spec:
-  provider:
-    slack:
-      auth:
-        secretRef:
-          name: secret-containing-token
-          namespace: example
-status:
-  todo: todo
-```
 
 ActionStores can be multiple as following:
 
