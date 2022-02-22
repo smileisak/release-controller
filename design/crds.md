@@ -72,12 +72,3 @@ Providers can be multiple, but ReleaseStore should refer to one provider. These 
 * Github
 * Gitlab
 * ArtifactHub
-
-
-
-ActionStores can be multiple as following:
-
-* Slack
-* Teams
-* Gitlab Issue
-* Jira Ticket
