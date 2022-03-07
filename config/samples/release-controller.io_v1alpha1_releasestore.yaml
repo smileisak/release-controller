@@ -1,0 +1,6 @@
+apiVersion: release-controller.io/v1alpha1
+kind: ReleaseStore
+metadata:
+  name: releasestore-sample
+spec:
+  # TODO(user): Add fields here
