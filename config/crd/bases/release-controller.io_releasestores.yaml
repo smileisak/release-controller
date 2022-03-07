@@ -5,9 +5,9 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: releasestores.release-controller.io.release-controller.io
+  name: releasestores.release-controller.io
 spec:
-  group: release-controller.io.release-controller.io
+  group: release-controller.io
   names:
     categories:
     - release
