@@ -17,29 +17,29 @@ limitations under the License.
 package controllers
 
 import (
-	"context"
+    "context"
 
-	"k8s.io/apimachinery/pkg/runtime"
-	ctrl "sigs.k8s.io/controller-runtime"
-	"sigs.k8s.io/controller-runtime/pkg/client"
-	"sigs.k8s.io/controller-runtime/pkg/log"
+    "k8s.io/apimachinery/pkg/runtime"
+    ctrl "sigs.k8s.io/controller-runtime"
+    "sigs.k8s.io/controller-runtime/pkg/client"
+    "sigs.k8s.io/controller-runtime/pkg/log"
 
-	releasecontrolleriov1alpha1 "github.com/smileisak/release-controller/api/v1alpha1"
+    releasecontrolleriov1alpha1 "github.com/smileisak/release-controller/api/v1alpha1"
+    apierrors "k8s.io/apimachinery/pkg/api/errors"
 )
 
 // ReleaseStoreReconciler reconciles a ReleaseStore object
 type ReleaseStoreReconciler struct {
-	client.Client
-	Scheme *runtime.Scheme
+    client.Client
+    Scheme *runtime.Scheme
 }
 
-//+kubebuilder:rbac:groups=release-controller.io.release-controller.io,resources=releasestores,verbs=get;list;watch;create;update;patch;delete
-//+kubebuilder:rbac:groups=release-controller.io.release-controller.io,resources=releasestores/status,verbs=get;update;patch
-//+kubebuilder:rbac:groups=release-controller.io.release-controller.io,resources=releasestores/finalizers,verbs=update
+//+kubebuilder:rbac:groups=release-controller.io,resources=releasestores,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=release-controller.io,resources=releasestores/status,verbs=get;update;patch
+//+kubebuilder:rbac:groups=release-controller.io,resources=releasestores/finalizers,verbs=update
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.
-// TODO(user): Modify the Reconcile function to compare the state specified by
 // the ReleaseStore object against the actual cluster state, and then
 // perform operations to make the cluster state reflect the state specified by
 // the user.
@@ -47,16 +47,23 @@ type ReleaseStoreReconciler struct {
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.11.0/pkg/reconcile
 func (r *ReleaseStoreReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
-	_ = log.FromContext(ctx)
+    l := log.FromContext(ctx)
+    var rs releasecontrolleriov1alpha1.ReleaseStore
 
-	// TODO(user): your logic here
+    err := r.Get(ctx, req.NamespacedName, &rs)
+    if apierrors.IsNotFound(err) {
+        return ctrl.Result{}, nil
+    } else if err != nil {
+        l.Error(err, "unable to get SecretStore")
+        return ctrl.Result{}, err
+    }
 
-	return ctrl.Result{}, nil
+    return ctrl.Result{}, nil
 }
 
 // SetupWithManager sets up the controller with the Manager.
 func (r *ReleaseStoreReconciler) SetupWithManager(mgr ctrl.Manager) error {
-	return ctrl.NewControllerManagedBy(mgr).
-		For(&releasecontrolleriov1alpha1.ReleaseStore{}).
-		Complete(r)
+    return ctrl.NewControllerManagedBy(mgr).
+        For(&releasecontrolleriov1alpha1.ReleaseStore{}).
+        Complete(r)
 }

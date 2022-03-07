@@ -6,7 +6,7 @@ metadata:
   name: manager-role
 rules:
 - apiGroups:
-  - release-controller.io.release-controller.io
+  - release-controller.io
   resources:
   - releasestores
   verbs:
@@ -18,13 +18,13 @@ rules:
   - update
   - watch
 - apiGroups:
-  - release-controller.io.release-controller.io
+  - release-controller.io
   resources:
   - releasestores/finalizers
   verbs:
   - update
 - apiGroups:
-  - release-controller.io.release-controller.io
+  - release-controller.io
   resources:
   - releasestores/status
   verbs:

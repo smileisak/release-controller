@@ -5,7 +5,7 @@ metadata:
   name: releasestore-viewer-role
 rules:
 - apiGroups:
-  - release-controller.io.release-controller.io
+  - release-controller.io
   resources:
   - releasestores
   verbs:
@@ -13,7 +13,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - release-controller.io.release-controller.io
+  - release-controller.io
   resources:
   - releasestores/status
   verbs:

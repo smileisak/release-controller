@@ -1,4 +1,4 @@
-apiVersion: release-controller.io.release-controller.io/v1alpha1
+apiVersion: release-controller.io/v1alpha1
 kind: ReleaseStore
 metadata:
   name: releasestore-sample

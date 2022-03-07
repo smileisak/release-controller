@@ -1,0 +1,9 @@
+apiVersion: release-controller.io/v1alpha1
+kind: ReleaseStore
+metadata:
+  name: github
+spec:
+  provider:
+    github:
+      repository: argoproj/argo-cd
+      tagRegex: "v\\d+.\\d+.\\d+$"

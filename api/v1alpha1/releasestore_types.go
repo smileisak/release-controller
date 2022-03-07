@@ -17,40 +17,40 @@ limitations under the License.
 package v1alpha1
 
 import (
-    corev1 "k8s.io/api/core/v1"
-    metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	corev1 "k8s.io/api/core/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 // ReleaseStoreSpec defines the desired state of ReleaseStore
 type ReleaseStoreSpec struct {
-    Provider *ReleaseStoreProvider `json:"provider"`
+	Provider *ReleaseStoreProvider `json:"provider"`
 }
 
 type ReleaseStoreProvider struct {
-    // +optional
-    Github *GithubProvider `json:"github"`
+	// +optional
+	Github *GithubProvider `json:"github"`
 }
 
 type ReleaseStoreConditionType string
 
 type ReleaseStoreStatusCondition struct {
-    Type   ReleaseStoreConditionType `json:"type"`
-    Status corev1.ConditionStatus    `json:"status"`
+	Type   ReleaseStoreConditionType `json:"type"`
+	Status corev1.ConditionStatus    `json:"status"`
 
-    // +optional
-    Reason string `json:"reason,omitempty"`
+	// +optional
+	Reason string `json:"reason,omitempty"`
 
-    // +optional
-    Message string `json:"message,omitempty"`
+	// +optional
+	Message string `json:"message,omitempty"`
 
-    // +optional
-    LastTransitionTime metav1.Time `json:"lastTransitionTime,omitempty"`
+	// +optional
+	LastTransitionTime metav1.Time `json:"lastTransitionTime,omitempty"`
 }
 
 // ReleaseStoreStatus defines the observed state of ReleaseStore
 type ReleaseStoreStatus struct {
-    // +optional
-    Conditions []ReleaseStoreStatusCondition `json:"conditions"`
+	// +optional
+	Conditions []ReleaseStoreStatusCondition `json:"conditions"`
 }
 
 //+kubebuilder:object:root=true
@@ -59,22 +59,22 @@ type ReleaseStoreStatus struct {
 
 // ReleaseStore is the Schema for the releasestores API
 type ReleaseStore struct {
-    metav1.TypeMeta   `json:",inline"`
-    metav1.ObjectMeta `json:"metadata,omitempty"`
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-    Spec   ReleaseStoreSpec   `json:"spec,omitempty"`
-    Status ReleaseStoreStatus `json:"status,omitempty"`
+	Spec   ReleaseStoreSpec   `json:"spec,omitempty"`
+	Status ReleaseStoreStatus `json:"status,omitempty"`
 }
 
 //+kubebuilder:object:root=true
 
 // ReleaseStoreList contains a list of ReleaseStore
 type ReleaseStoreList struct {
-    metav1.TypeMeta `json:",inline"`
-    metav1.ListMeta `json:"metadata,omitempty"`
-    Items           []ReleaseStore `json:"items"`
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []ReleaseStore `json:"items"`
 }
 
 func init() {
-    SchemeBuilder.Register(&ReleaseStore{}, &ReleaseStoreList{})
+	SchemeBuilder.Register(&ReleaseStore{}, &ReleaseStoreList{})
 }
